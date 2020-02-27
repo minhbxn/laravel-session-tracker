@@ -18,7 +18,7 @@ class SessionTrackerServiceProvider extends ServiceProvider {
 		]);
 
 		$router = $this->app['router'];
-		$router->middleware('session', 'Hamedmehryar\SessionTracker\Middleware\SessionTracker');
+		$router->aliasMiddleware('session', 'Hamedmehryar\SessionTracker\Middleware\SessionTracker');
 	}
 
 	/**
