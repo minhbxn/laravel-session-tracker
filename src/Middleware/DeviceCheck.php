@@ -3,6 +3,7 @@
 use Closure;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Str;
 
 class DeviceCheck {
 
@@ -16,7 +17,7 @@ class DeviceCheck {
 	public function handle($request, Closure $next)
 	{
 		if(!Cookie::has('d_i')){
-			Cookie::queue(Cookie::forever('d_i', str_random(60), null, null, Config::get('session.secure', false), Config::get('session.http_only', true)));
+			Cookie::queue(Cookie::forever('d_i', Str::random(60), null, null, Config::get('session.secure', false), Config::get('session.http_only', true)));
 		}
 		return $next($request);
 	}
