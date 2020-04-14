@@ -26,7 +26,7 @@ In composer.json:
 In composer.json:
 
     "require": {
-        "minhbxn/laravel-session-tracker" "2.0.0"
+        "minhbxn/laravel-session-tracker" "3.0.0"
     }
     
 Run:
