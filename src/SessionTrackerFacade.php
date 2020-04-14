@@ -9,6 +9,16 @@
 
 use Illuminate\Support\Facades\Facade;
 
+/**
+ * @method static endSession($forgetSession)
+ * @method static isSessionBlocked()
+ * @method static isSessionLocked()
+ * @method static refreshSession(\Illuminate\Http\Request $request)
+ * @method static logSession(\Illuminate\Http\Request $request)
+ * @method static forgotSession()
+ * @method static startSession()
+ * @method static renewSession()
+ */
 class SessionTrackerFacade extends Facade
 {
     /**

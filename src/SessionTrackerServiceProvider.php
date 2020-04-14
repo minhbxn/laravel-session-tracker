@@ -3,53 +3,57 @@
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 
-class SessionTrackerServiceProvider extends ServiceProvider {
+class SessionTrackerServiceProvider extends ServiceProvider
+{
 
-	/**
-	 * Bootstrap the application services.
-	 *
-	 * @return void
-	 */
-	public function boot()
-	{
-		$this->publishes([
-			base_path('vendor/hamedmehryar/laravel-session-tracker/src/config/config.php') => config_path('sessionTracker.php'),
-			base_path('vendor/hamedmehryar/laravel-session-tracker/src/migrations') => base_path('database/migrations')
-		]);
+    /**
+     * Bootstrap the application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $this->publishes([
+            __DIR__ . '/config/config.php' => config_path('sessionTracker.php')], 'config');
 
-		$router = $this->app['router'];
-		$router->aliasMiddleware('session', 'Hamedmehryar\SessionTracker\Middleware\SessionTracker');
-	}
+        $this->publishes([
+            __DIR__ . '/migrations' => base_path('database/migrations')
+        ], 'migrations');
 
-	/**
-	 * Register the application services.
-	 *
-	 * @return void
-	 */
-	public function register()
-	{
-		$this->mergeConfigFrom(
-			base_path('vendor/hamedmehryar/laravel-session-tracker/src/config/config.php'), 'sessionTracker'
-		);
-		$this->registerSessionTracker();
-		$this->registerAuthenticationEventHandler();
-	}
+        $router = $this->app['router'];
+        $router->aliasMiddleware('session', 'Hamedmehryar\SessionTracker\Middleware\SessionTracker');
+    }
 
-	/**
-	 * Register the the sessionTracker facade.
-	 *
-	 * @return void
-	 */
-	private function registerSessionTracker()
-	{
-		$this->app->bind('sessionTracker', function ($app) {
-			return new SessionTracker($app);
-		});
-	}
+    /**
+     * Register the application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $config = __DIR__ . '/config/config.php';
+        $this->mergeConfigFrom(
+            $config, 'sessionTracker'
+        );
+        $this->registerSessionTracker();
+        $this->registerAuthenticationEventHandler();
+    }
 
-	private function registerAuthenticationEventHandler(){
+    /**
+     * Register the the sessionTracker facade.
+     *
+     * @return void
+     */
+    private function registerSessionTracker()
+    {
+        $this->app->bind('sessionTracker', function ($app) {
+            return new SessionTracker($app);
+        });
+    }
 
-		Event::subscribe('Hamedmehryar\SessionTracker\AuthenticationHandler');
-	}
+    private function registerAuthenticationEventHandler()
+    {
+        Event::subscribe('Hamedmehryar\SessionTracker\AuthenticationHandler');
+    }
 
 }

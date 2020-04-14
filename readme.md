@@ -10,6 +10,11 @@ This package provides session tracking functionalities, multisession management 
 * User Devices
 
 
+Fork Notes
+==============
+This repository clones from [hamedmehryar](https://github.com/hamedmehryar/laravel-session-tracker) original repository.
+
+
 ## Installation (Laravel 5.x)
 In composer.json:
 
@@ -17,6 +22,13 @@ In composer.json:
         "hamedmehryar/laravel-session-tracker" "1.0.0"
     }
 
+## Installation (Laravel 6.x)
+In composer.json:
+
+    "require": {
+        "minhbxn/laravel-session-tracker" "2.0.0"
+    }
+    
 Run:
 
     composer update
@@ -130,4 +142,5 @@ From SessionTrackerFacade:
 ## Author
 
 - [Hamed Mehryar](https://github.com/hamedmehryar)
+- [MinhBXN](https://github.com/minhbxn)
 

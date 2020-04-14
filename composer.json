@@ -1,24 +1,28 @@
 {
-    "name": "minhbxn/laravel-session-tracker",
-    "description": "This package provides session tracking functionalities, multisession management and user device management features for laravel applications.",
-    "type": "library",
-    "require": {
-        "php": ">=7.0",
-        "laravel/framework": ">6.0",
-        "nesbot/carbon": "~2.0",
-        "jenssegers/agent": "^2.3"
+  "name": "minhbxn/laravel-session-tracker",
+  "description": "This package provides session tracking functionalities, multisession management and user device management features for laravel applications.",
+  "type": "library",
+  "require": {
+    "php": "^7.2",
+    "laravel/framework": "^6.0",
+    "nesbot/carbon": "~2.0",
+    "jenssegers/agent": "^2.3"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Hamed Mehryar",
+      "email": "hamed@netlinks.af"
     },
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Hamed Mehryar",
-            "email": "hamed@netlinks.af"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "Hamedmehryar\\SessionTracker\\": "src/"
-        }
-    },
-    "minimum-stability": "stable"
+    {
+      "name": "Minh Bui",
+      "email": "minhbxn@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Hamedmehryar\\SessionTracker\\": "src/"
+    }
+  },
+  "minimum-stability": "stable"
 }

@@ -1,17 +1,16 @@
 <?php namespace Hamedmehryar\SessionTracker;
 
 
-class AuthenticationHandler {
-
-
+class AuthenticationHandler
+{
     /**
      * Handle user login events.
      */
     public function onLogin($event)
     {
-        if(SessionTrackerFacade::forgotSession()){
+        if (SessionTrackerFacade::forgotSession()) {
             SessionTrackerFacade::startSession();
-        }else{
+        } else {
             SessionTrackerFacade::renewSession();
         }
     }
@@ -19,8 +18,7 @@ class AuthenticationHandler {
     /**
      * Register the listeners for the subscriber.
      *
-     * @param  Illuminate\Events\Dispatcher  $events
-     * @return array
+     * @param \Illuminate\Events\Dispatcher $events
      */
     public function subscribe($events)
     {

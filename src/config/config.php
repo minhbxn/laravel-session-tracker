@@ -45,7 +45,7 @@ return [
 	|
 	*/
 
-	'inactivity_seconds' => 1200,
+	'inactivity_seconds' => 7200,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -58,7 +58,7 @@ return [
 	|
 	*/
 
-	'login_route_name' => 'app.login',
+	'login_route_name' => 'login',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -71,7 +71,7 @@ return [
 	|
 	*/
 
-	'logout_route_name' => 'app.logout',
+	'logout_route_name' => 'logout',
 
 
 	/*

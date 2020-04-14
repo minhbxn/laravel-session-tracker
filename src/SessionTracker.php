@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
  * @license MIT
  * @package hamedmehryar\session-tracker
  */
-
 class SessionTracker
 {
     /**
@@ -36,7 +35,8 @@ class SessionTracker
     /**
      * @return static
      */
-    public function startSession(){
+    public function startSession()
+    {
         return Session::start();
     }
 
@@ -44,14 +44,16 @@ class SessionTracker
      * @param bool $forgetSession
      * @return bool
      */
-    public function endSession($forgetSession = false){
+    public function endSession($forgetSession = false)
+    {
         return Session::end($forgetSession);
     }
 
     /**
      * @return bool
      */
-    public function renewSession(){
+    public function renewSession()
+    {
         return Session::renew();
     }
 
@@ -59,15 +61,17 @@ class SessionTracker
      * @param $request
      * @return bool
      */
-    public function refreshSession($request){
-        return Session::refresh($request);
+    public function refreshSession($request)
+    {
+        return Session::refreshSes($request);
     }
 
     /**
      * @param $request
      * @return bool
      */
-    public function logSession($request){
+    public function logSession($request)
+    {
         return Session::log($request);
     }
 
@@ -75,7 +79,8 @@ class SessionTracker
      * @param null $user
      * @return bool
      */
-    public function isSessionInactive($user = null){
+    public function isSessionInactive($user = null)
+    {
         return Session::isInactive($user);
     }
 
@@ -83,11 +88,13 @@ class SessionTracker
      * @param $sessionId
      * @return bool
      */
-    public function blockSession($sessionId){
+    public function blockSession($sessionId)
+    {
         return Session::blockById($sessionId);
     }
 
-    public function sessionRequests($sessionId){
+    public function sessionRequests($sessionId)
+    {
         try {
             $session = Session::findOrFail($sessionId);
         } catch (ModelNotFoundException $e) {
@@ -95,24 +102,28 @@ class SessionTracker
         }
         return $session->requests;
     }
+
     /**
      * @return bool
      */
-    public function isSessionBlocked(){
+    public function isSessionBlocked()
+    {
         return Session::isBlocked();
     }
 
     /**
      * @return bool
      */
-    public function isSessionLocked(){
+    public function isSessionLocked()
+    {
         return Session::isLocked();
     }
 
     /**
      * @return int|null
      */
-    public function lockSessionByCode(){
+    public function lockSessionByCode()
+    {
         return Session::lockByCode();
     }
 
@@ -120,18 +131,21 @@ class SessionTracker
      * @param $code
      * @return bool
      */
-    public function unlockSessionByCode($code){
+    public function unlockSessionByCode($code)
+    {
         return Session::unlockByCode($code);
     }
 
     /**
      * @return bool
      */
-    public function isUserDevice(){
+    public function isUserDevice()
+    {
         return Device::isUserDevice();
     }
 
-    public function deleteDevice($id){
+    public function deleteDevice($id)
+    {
         return Device::destroy($id);
     }
 
@@ -142,31 +156,37 @@ class SessionTracker
      * @param $device
      * @return bool
      */
-    public function addUserDevice(){
+    public function addUserDevice()
+    {
         return Device::addUserDevice();
     }
 
-    public function forgotSession(){
-        return ! \Illuminate\Support\Facades\Session::has('dbsession.id');
+    public function forgotSession()
+    {
+        return !\Illuminate\Support\Facades\Session::has('dbsession.id');
     }
 
-    public function sessionId(){
+    public function sessionId()
+    {
         return \Illuminate\Support\Facades\Session::get('dbsession.id', NULL);
     }
 
-    public function deleteSession(){
+    public function deleteSession()
+    {
 
-        if($this->sessionId() != null){
+        if ($this->sessionId() != null) {
             Session::destroy($this->sessionId());
             \Illuminate\Support\Facades\Session::forget('dbsession.id');
         }
     }
 
-    public function securityCode(){
+    public function securityCode()
+    {
         return Session::loginCode();
     }
 
-    public function refreshSecurityCode(){
+    public function refreshSecurityCode()
+    {
         return Session::refreshCode();
     }
 }

@@ -1,36 +1,43 @@
 <?php namespace Hamedmehryar\SessionTracker\Traits;
 
-use Illuminate\Support\Facades\Session;
-use Illuminate\Foundation\Application;
 use Hamedmehryar\SessionTracker\Models\Session as SessionTrack;
+use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
-trait SessionTrackerUserTrait{
+trait SessionTrackerUserTrait
+{
 
-    public function activeSessions($exceptSelf = false){
-        $query =  $this->sessions()->where('end_date', null)->where('block', SessionTrack::STATUS_DEFAULT)->where('login_code', null);
-        if($exceptSelf){
-            if(Session::has('dbsession.id')){
+    public function activeSessions($exceptSelf = false)
+    {
+        $query = $this->sessions()->where('end_date', null)->where('block', SessionTrack::STATUS_DEFAULT)->where('login_code', null);
+        if ($exceptSelf) {
+            if (Session::has('dbsession.id')) {
                 $query->where('id', '!=', Session::get('dbsession.id'));
             }
         }
         return $query;
     }
 
-    public function sessions(){
+    public function sessions()
+    {
         return $this->hasMany('Hamedmehryar\SessionTracker\Models\Session');
     }
 
-    public function getFreshestSession(){
+    public function getFreshestSession()
+    {
         return $this->sessions()->orderBy('last_activity', 'desc')->first();
     }
 
-    public function devices(){
+    public function devices()
+    {
         return $this->hasMany('Hamedmehryar\SessionTracker\Models\Device');
     }
 
-    public function devicesUids(){
+    public function devicesUids()
+    {
         $query = $this->devices()->lists('uid');
-        if(! str_contains(Application::VERSION, '5.0')){
+        if (!Str::contains(Application::VERSION, '5.0')) {
             $query = $query->all();
         }
         return $query;
